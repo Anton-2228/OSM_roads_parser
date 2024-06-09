@@ -4,7 +4,9 @@ import xml.etree.ElementTree as ET
 way_types = ['service', 'residential', 'tertiary', 'motorway',
              'trunk', 'primary', 'secondary', 'tertiary',
              'motorway_link', 'trunk_link', 'primary_link', 'secondary_link',
-             'tertiary_link']
+             'tertiary_link', 'footway']
+
+railway_types = []
 
 def get_attr(element, key):
     for i in element.items():
@@ -18,6 +20,11 @@ def get_bounds(tree):
     bounds["maxlat"] = float(get_attr(element, "maxlat")[1])
     bounds["minlon"] = float(get_attr(element, "minlon")[1])
     bounds["maxlon"] = float(get_attr(element, "maxlon")[1])
+    # bounds["minlon"] = 36.7767
+    # bounds["maxlon"] = 38.7048
+    # bounds["minlat"] = 55.2720
+    # bounds["maxlat"] = 56.2738
+
     bounds["delt_lat"] = bounds["maxlat"] - bounds["minlat"]
     bounds["delt_lon"] = bounds["maxlon"] - bounds["minlon"]
     return bounds
@@ -29,6 +36,8 @@ def get_ways(tree):
         tags = way.findall("tag")
         for tag in tags:
             if get_attr(tag, 'k')[1] == 'highway' and get_attr(tag, 'v')[1] in way_types:
+                ways.append(way)
+            elif get_attr(tag, 'k')[1] == 'railway':
                 ways.append(way)
     return ways
 
