@@ -1,21 +1,17 @@
-import xml.etree.ElementTree as ET
+import sys
 
-def get_bounds(tree):
-    element = tree.getroot().find("bounds").items()
-    bounds = {}
-    for i in element:
-        match i[0]:
-            case "minlat":
-                bounds["minlat"] = float(i[1])
-            case "maxlat":
-                bounds["maxlat"] = float(i[1])
-            case "minlon":
-                bounds["minlon"] = float(i[1])
-            case "maxlon":
-                bounds["maxlon"] = float(i[1])
-    return bounds
+from osm_parser import get_tree, get_bounds, get_ways, get_nodes, get_points
+from render import render
 
 if __name__ == "__main__":
-    tree = ET.parse("map.osm")
+    args = sys.argv
+    # osm_file = args[1]
+    # output_file = args[2]
+    osm_file = "big.osm"
+    output_file = "map.png"
+    tree = get_tree(osm_file)
     bounds = get_bounds(tree)
-    print(bounds)
+    ways = get_ways(tree)
+    nodes = get_nodes(tree)
+    points = get_points(ways, nodes)
+    render(output_file, points, bounds)
