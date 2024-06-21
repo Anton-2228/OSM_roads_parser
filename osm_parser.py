@@ -37,8 +37,10 @@ def get_ways(tree):
         for tag in tags:
             if get_attr(tag, 'k')[1] == 'highway' and get_attr(tag, 'v')[1] in way_types:
                 ways.append(way)
+                break
             elif get_attr(tag, 'k')[1] == 'railway':
                 ways.append(way)
+                break
     return ways
 
 def get_nodes(tree):

@@ -1,10 +1,20 @@
+import time
+
 import requests
 import sys
 
 if __name__ == "__main__":
+    a = time.time()
     args = sys.argv
     # maxi = [60.1044, 30.1108]
     # mini = [59.7961, 30.5695]
+    # 55.892709, 37.398456
+    # 55.600405, 37.809108
+    # minlat = 59.7961
+    # minlon = 30.5695
+    # maxlat = 60.1044
+    # maxlon = 30.1108
+    # file = "test.osm"
     minlat = args[1]
     minlon = args[2]
     maxlat = args[3]
@@ -36,3 +46,6 @@ if __name__ == "__main__":
     else:
         print(f"Ошибка выполнения запроса: {response.status_code}")
         print(response.text)
+
+    e = time.time()
+    print(e-a)

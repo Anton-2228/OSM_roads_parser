@@ -27,6 +27,7 @@ def render(file, points, bounds):
             node_x_s, node_y_s = convert_to_pix(way["nodes"][x+1]["lon"], way["nodes"][x+1]["lat"])
             f = get_image_cord((node_x_f, node_y_f), size_x_min, size_y_max)
             s = get_image_cord((node_x_s, node_y_s), size_x_min, size_y_max)
+
             im.line([f, s], fill="white", width=1)
 
     image.show()
